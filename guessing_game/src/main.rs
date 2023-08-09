@@ -1,4 +1,5 @@
 use rand::Rng;
+use std::cmp::Ordering;
 use std::io;
 
 fn main() {
@@ -20,7 +21,22 @@ fn main() {
         .read_line(&mut guess)
         .expect("Failed to read line");
 
+    // Rust allows shadowing.
+    // Often used when converting to different types
+    let guess: u32 = guess
+        .trim()
+        // rust knows what to parse the value to by referencing the type
+        // above
+        .parse()
+        .expect("Please type a number!");
+
     // println!("You guessed: {guess}");
     // The following way you can manipulate the value
-    println!("you guessed {}", guess)
+    println!("you guessed {}", guess);
+
+    match guess.cmp(&secret_number) {
+        Ordering::Less => println!("Too small"),
+        Ordering::Greater => println!("Too big!"),
+        Ordering::Equal => println!("You win"),
+    }
 }
