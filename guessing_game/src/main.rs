@@ -1,7 +1,13 @@
+use rand::Rng;
 use std::io;
 
 fn main() {
     println!("Guess the number!");
+
+    // cargo doc --open shows documentation of all crates installed
+    let secret_number = rand::thread_rng().gen_range(1..=100);
+
+    println!("The secret number is: {secret_number}");
 
     println!("Please input your guess:");
 
